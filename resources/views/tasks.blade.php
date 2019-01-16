@@ -4,10 +4,7 @@
     <div class="container">
          <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
-                <!-- <div class="panel-heading">
-                    New Task
-                </div> -->
-
+                
                 <!-- <div class="panel-body"> -->
                     <!-- Отображение ошибок ввода  Validation Errors -->
                     <!-- @include('errors') -->
@@ -58,10 +55,10 @@
                                             <div>{{ $task->name }}</div>
                                         </td>
  
-                                        <!-- Task Delete Button -->
+                                        <!-- кнопка Удалить -->
                                         <td>
-                                            <form action="{{ url('task/'.$task->id) }}" method="POST">
-                                            <!-- <form action="/task/{{ $task->id }}" method="POST"> -->  
+                                            <!-- <form action="{{ url('task/'. $task->id) }}" method="POST"> -->
+                                            <form action="/task/{{ $task->id }}" method="POST">  
                                                 @csrf
                                                 {{ method_field('DELETE') }}
 

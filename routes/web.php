@@ -19,20 +19,32 @@ use Illuminate\Http\Request;
 //});
 
 // список :
-Route::get ('/', 'TaskController@show');
+ Route::get ('/', 'TaskController@show');
     
 
 // добавить task :
-Route::post ('/task', 'TaskController@create');
+ Route::post ('/task', 'TaskController@create');
   
 
 // удалить task:
-Route::delete ('/task/{id}', 'TaskController@delete');
+ Route::delete ('/task/{id}', 'TaskController@delete');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+ Route::get('/home', 'HomeController@index')->name('home');
 
+/*
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    })->middleware('guest');
+
+Route::get('/tasks', 'TaskController@show');
+Route::post('/task', 'TaskController@create');
+Route::delete('/task/{id}', 'TaskController@delete');
+// Route::auth();
+});
+*/
 
 
 

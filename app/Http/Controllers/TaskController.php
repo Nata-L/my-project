@@ -8,27 +8,39 @@ use Illuminate\Support\Facades\Validator;
 
 class TaskController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show()
     {
-        return view('tasks', ['tasks' => Task::orderBy('created_at', 'asc')->get()]);
+        $tasks = Task::where('user_id', auth()->user()->id)
+                ->orderBy('created_at', 'asc')        
+                ->get();
+
+        // dd($tasks);
+
+        return view('tasks', ['tasks' => $tasks]);
     }
 
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), ['name' => 'required|max:255']);
+        $this->validate($request, [ 'name' => 'required|max:255' ]);
 
-        // dd($request->all());
-        
-        if ($validator->fails()) {
-            return redirect('/')->withInput()->withErrors($validator);
-        }
-        
         // Создание задачи
+
         $task = new Task;
         $task->name = $request->name;
+        $task->user_id = auth()->user()->id;
         $task->save();
+        return redirect('/');
 
-    return redirect('/');
+        //$request->user()->tasks()->create(['name' => $request->name ]);
+        
+        //return redirect('/tasks');
+        
     }
 
     public function delete($id)
