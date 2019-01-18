@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function show()
     {
         $tasks = Task::where('user_id', auth()->user()->id)
-                ->orderBy('created_at', 'asc')        
+                ->orderBy('created_at', 'desc')        
                 ->get();
 
         // dd($tasks);
@@ -37,16 +37,21 @@ class TaskController extends Controller
         $task->save();
         return redirect('/');
 
-        //$request->user()->tasks()->create(['name' => $request->name ]);
-        
-        //return redirect('/tasks');
-        
+        //$request->user()->tasks()->create(['name' => $request->name ]);        
+        //return redirect('/tasks');        
     }
 
     public function delete($id)
     {
         Task::findOrFail($id)->delete();
 
+        return redirect('/');
+    }
+
+    public function setStatus($id)
+    {
+       Task::where('id', $id)->update(['status' => 'completed', ]);
+ 
         return redirect('/');
     }
 }

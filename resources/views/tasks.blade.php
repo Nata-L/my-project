@@ -5,11 +5,11 @@
          <div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 
-                <!-- <div class="panel-body"> -->
-                    <!-- Отображение ошибок ввода  Validation Errors -->
-                    <!-- @include('errors') -->
+               <div class="panel-body">
+                    <!-- validation errors -->
+                    @include('errors')
 
-                    <!-- new task  -->
+                    <!--new task-->
                     <form action="{{ url('task')}}" method="POST" class="form-horizontal">
                         @csrf
 
@@ -22,7 +22,7 @@
                             </div>
                         </div>
 
-                        <!-- Кнопка добавления задачи  -->
+                        <!-- button "add task" -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
@@ -34,30 +34,85 @@
                 </div>
             </div>
 
-            <!-- Текущие задачи -->
-            @if (count($tasks) > 0)
+            <!-- Current task -->
+            @if (count($tasks) > 0)            
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Текущая задача
+                        Текущие задачи
                     </div>
 
                     <div class="panel-body">
                         <table class="table table-striped task-table">
 
-                            <!-- <thead>
-                                <th>Задача</th>                                
-                            </thead>
-                            -->
                             <tbody>
                                 @foreach ($tasks as $task)
+                                    @if ($task->status !== 'completed')
                                     <tr>
                                         <td class="table-text">
                                             <div>{{ $task->name }}</div>
                                         </td>
- 
-                                        <!-- кнопка Удалить -->
+                                        <td class="table-text">
+                                            <div>{{ $task->status }}</div>
+                                        </td>
                                         <td>
-                                            <!-- <form action="{{ url('task/'. $task->id) }}" method="POST"> -->
+                                            
+                                            <form action="/task/{{ $task->id }}" method="POST">  
+                                                @csrf
+                                                
+                                                <!-- button "Completed" -->
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fa fa-btn fa-trash"></i>Исполнено
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                            <!-- button "Delete" -->
+                                        <td>
+                                            
+                                            <form action="/task/{{ $task->id }}" method="POST">  
+                                                @csrf
+                                                {{ method_field('DELETE') }}
+
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-btn fa-trash"></i>Удалить
+                                                </button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                
+            @endif
+
+            <!-- Completed task -->
+            @if ($task->status === 'completed')
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Выполненные задачи :
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-striped task-table">
+
+                            <tbody>
+                                @foreach ($tasks as $task)
+                                    @if ($task->status !== 'new')
+                                    <tr>
+                                        <td class="table-text">
+                                            <div>{{ $task->name }}</div>
+                                        </td>
+                                        <td class="table-text">
+                                            <div>{{ $task->status }}</div>
+                                        </td>
+                                        <td>
+
+                                          <!-- button "Delete" -->  
                                             <form action="/task/{{ $task->id }}" method="POST">  
                                                 @csrf
                                                 {{ method_field('DELETE') }}
@@ -68,9 +123,11 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             @endif

@@ -14,73 +14,20 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-// список :
- Route::get ('/', 'TaskController@show');
+// list :
+Route::get ('/', 'TaskController@show');
     
 
-// добавить task :
- Route::post ('/task', 'TaskController@create');
+// add task :
+Route::post ('/task', 'TaskController@create');
   
 
-// удалить task:
- Route::delete ('/task/{id}', 'TaskController@delete');
+// delete task:
+Route::delete ('/task/{id}', 'TaskController@delete');
+
+// set status:
+Route::post ('/task/{id}', 'TaskController@setStatus')->name('completed');
 
 Auth::routes();
 
- Route::get('/home', 'HomeController@index')->name('home');
-
-/*
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    })->middleware('guest');
-
-Route::get('/tasks', 'TaskController@show');
-Route::post('/task', 'TaskController@create');
-Route::delete('/task/{id}', 'TaskController@delete');
-// Route::auth();
-});
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Route::get ('/tasks', function () {
-//    $tasks = App\Task::all();
-
-    // dd($tasks);
-  
-//    return redirect('/');
-//  });
-
-
-/*
-Route::match(['get', 'post'], '/', function () {
-    return view('welcome');
-});
-*/
-
-/*
-Route::post('/com', function () {
-    print_r($_POST);
-});
-*/
-
-
+Route::get('/home', 'HomeController@index')->name('home');
