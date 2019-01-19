@@ -19,8 +19,9 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}} 
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"> 
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
@@ -80,6 +81,9 @@
             @yield('content')
         </main>
     </div>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+    <!-- <script src="{{ asset('js/myapp.js') }}"></script> -->
+    <!-- <script src="resources/js/myapp.js" ></script> -->
+     <script src="{{ elixir('js/myapp.js') }}"></script> 
 </body>
 </html>

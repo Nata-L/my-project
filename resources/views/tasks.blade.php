@@ -25,7 +25,7 @@
                         <!-- button "add task" -->
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
-                                <button type="submit" class="btn btn-default">
+                                <button type="submit" class="btn btn-secondary">
                                     <i class="fa fa-btn fa-plus"></i> Добавить задачу
                                 </button>
                             </div>
@@ -91,18 +91,17 @@
             @endif
 
             <!-- Completed task -->
-            @if ($task->status === 'completed')
-                <div class="panel panel-default">
+                <div class="panel panel-default  toggle-btn">
                     <div class="panel-heading">
-                        Выполненные задачи :
+                        <button class="btn btn-secondary  compl-task-btn"> Выполненные задачи : </button>
                     </div>
-
+                    
                     <div class="panel-body">
                         <table class="table table-striped task-table">
-
-                            <tbody>
-                                @foreach ($tasks as $task)
-                                    @if ($task->status !== 'new')
+                            <tbody> 
+                            @foreach ($tasks as $task)
+                            @if ($task->status === 'completed')                               
+                                @if ($task->status !== 'new')
                                     <tr>
                                         <td class="table-text">
                                             <div>{{ $task->name }}</div>
@@ -110,8 +109,8 @@
                                         <td class="table-text">
                                             <div>{{ $task->status }}</div>
                                         </td>
-                                        <td>
 
+                                        <td>
                                           <!-- button "Delete" -->  
                                             <form action="/task/{{ $task->id }}" method="POST">  
                                                 @csrf
@@ -123,14 +122,15 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    @endif
-                                @endforeach
+                                @endif
+                                @endif
+                                @endforeach 
                             </tbody>
                         </table>
                         
                     </div>
                 </div>
-            @endif
+                        
         </div>
     </div>
 @endsection
