@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-3 col-sm-6">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-btn fa-plus"></i>Добавить задачу
+                                    <i class="fa fa-btn fa-plus"></i> Добавить задачу
                                 </button>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                                 
                                                 <!-- button "Completed" -->
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="fa fa-btn fa-trash"></i>Исполнено
+                                                    <i class="fa fa-btn fa-check-circle"></i>  Исполнено
                                                 </button>
                                             </form>
                                         </td>
@@ -74,7 +74,7 @@
                                                 {{ method_field('DELETE') }}
 
                                                 <button type="submit" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Удалить
+                                                    <i class="fa fa-btn fa-trash"></i>  Удалить
                                                 </button>
                                             </form>
                                         </td>
@@ -118,7 +118,7 @@
                                                 {{ method_field('DELETE') }}
 
                                                 <button type="submit" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Удалить
+                                                    <i class="fa fa-btn fa-trash"></i>  Удалить
                                                 </button>
                                             </form>
                                         </td>
